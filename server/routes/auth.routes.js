@@ -1,4 +1,4 @@
-const { signin, infoUser } = require("../controllers/auth.controller");
+const { signin, infoUser, refreshToken } = require("../controllers/auth.controller");
 const { verifyToken } = require("../middleware/authJwt");
 const { checkAccess } = require("../middleware/auth");
 
@@ -14,6 +14,11 @@ module.exports = function (app) {
     app.post(
         "/auth/signin",
         signin
+    );
+    
+    app.post(
+        "/auth/refresh",
+        refreshToken
     );
 
     app.post(

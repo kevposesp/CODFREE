@@ -1,0 +1,76 @@
+.login {
+    .login-cont {
+        min-height: calc(100vh - 56px);
+    }
+
+    .changeMode {
+        display: flex;
+        justify-content: center;
+
+        div {
+            width: 150px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .log {
+            background-color: $greyOne;
+            transition: 1s;
+            &.active {
+                background-color: $blueOne;
+            }
+        }
+
+        .signup {
+            background-color: $greyOne;
+            transition: 1s;
+            &.active {
+                background-color: $blueOne;
+            }
+        }
+    }
+
+    .loginCont {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .signupCont {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+}
+
+@include breakpoint(sm) {
+    .login {
+        .changeMode {
+            div {
+                width: 100px;
+            }
+        }
+    }
+}
+@include breakpoint(md) {
+}
+@include breakpoint(lg) {
+}
+@include breakpoint(xl) {
+}
+@include breakpoint(xxl) {
+}
+@include breakpoint(sm, min) {
+}
+@include breakpoint(md, min) {
+}
+@include breakpoint(lg, min) {
+}
+@include breakpoint(xl, min) {
+}
+@include breakpoint(xxl, min) {
+}
