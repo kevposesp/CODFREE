@@ -1,6 +1,7 @@
 const { signin, infoUser, refreshToken } = require("../controllers/auth.controller");
 const { verifyToken } = require("../middleware/authJwt");
 const { checkAccess } = require("../middleware/auth");
+const { checkDuplicateUsernameOrEmail } = require("../middleware/verifySignUp");
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -15,7 +16,15 @@ module.exports = function (app) {
         "/auth/signin",
         signin
     );
-    
+
+    app.post(
+        "/auth/signup",
+        [
+            checkDuplicateUsernameOrEmail
+        ],
+        signup
+    );
+
     app.post(
         "/auth/refresh",
         refreshToken

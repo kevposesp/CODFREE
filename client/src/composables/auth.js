@@ -23,9 +23,9 @@ export function authComp() {
     const refreshToken = async (token) => {
         const res = await ApiService.post(
             "/auth/refresh",
-            {refreshToken: token}
+            { refreshToken: token }
         )
-        if(res.status == 200){
+        if (res.status == 200) {
             localStorage.setItem('accessToken', res.data.accessToken)
             localStorage.setItem('refreshToken', res.data.refreshToken)
         } else {
@@ -34,8 +34,37 @@ export function authComp() {
         }
     }
 
+    const signup = async (usr) => {
+
+        const res = await ApiService.post(
+            "/auth/signup",
+            usr
+        )
+        if(res.status == 200) {
+            return {
+                status: 200
+            }
+        } else {
+            if(res.response.data.message == 'err_sgup_username_ex') {
+                return {
+                    status: 500,
+                    message: 'err_sgup_username_ex'
+                }
+            } else if(res.response.data.message == 'err_sgup_email_ex') {
+                return {
+                    status: 500,
+                    message: 'err_sgup_email_ex'
+                }
+            }
+            return {
+                status: 500
+            }
+        }
+    }
+
     return {
         login,
-        refreshToken
+        refreshToken,
+        signup
     }
 }

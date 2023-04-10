@@ -76,7 +76,7 @@ export default {
                 message: ''
             }, mode: 'login'
         })
-        const { login } = authComp()
+        const { login, signup } = authComp()
         const userData = reactive({
             login: {
                 username: 'ax',
@@ -94,13 +94,13 @@ export default {
             let data = userData;
             if (t == 'login') {
                 return {
-                    user: data.login.username,
+                    username: data.login.username,
                     password: data.login.password
                 }
             } else if (t == 'signup') {
                 return {
                     name: data.signup.name,
-                    user: data.signup.username,
+                    username: data.signup.username,
                     email: data.signup.email,
                     password: data.signup.password
                 }
@@ -132,9 +132,40 @@ export default {
                 }, 3000);
             }
         }
+        const signUp = async () => {
+            let usr = processUserData('signup')
+            let sign = await signup(usr)
+            if (sign.status == 200) {
+                state.alertData.open = true
+                state.alertData.status = 200
+                state.alertData.message = 'Te has registrado correctamente!'
+
+                setTimeout(() => {
+                    state.alertData.open = false
+                    router.push("/auth")
+                }, 3000);
+            } else {
+                state.alertData.open = true
+                state.alertData.status = 501
+                
+                if(sign.message == 'err_sgup_username_ex') {
+                    state.alertData.message = 'El nombre de usuario ya existe'
+                } else if(sign.message == 'err_sgup_email_ex') {
+                    state.alertData.message = 'El email ya existe'
+                } else {
+                    state.alertData.message = 'Error interno'
+                }
+                
+                setTimeout(() => {
+                    state.alertData.open = false
+                    router.push("/auth")
+                }, 3000);
+            }
+        }
         return {
             userData,
             signIn,
+            signUp,
             state
         }
     },

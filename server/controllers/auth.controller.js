@@ -8,9 +8,10 @@ var bcrypt = require("bcryptjs");
 const { enableLog } = require("../middleware/auth");
 
 signin = async (req, res) => {
+    const { username, password } = req.body
     User.findOne({
         where: {
-            username: req.body.user
+            username
         }
     })
         .then(async (user) => {
@@ -19,7 +20,7 @@ signin = async (req, res) => {
             }
 
             var passwordIsValid = bcrypt.compareSync(
-                req.body.password,
+                password,
                 user.password
             );
 
@@ -114,10 +115,28 @@ infoUser = (req, res) => {
         });
 };
 
+signup = (req, res) => {
+    // Save User to Database
+    const { name, username, email, password } = req.body
+    User.create({
+        name,
+        username,
+        email,
+        password: bcrypt.hashSync(password, 8)
+    })
+        .then(user => {
+            res.send({ message: "User was registered successfully!" });
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+
 const authController = {
     signin,
     refreshToken,
-    infoUser
+    infoUser,
+    signup
 }
 
 module.exports = authController
