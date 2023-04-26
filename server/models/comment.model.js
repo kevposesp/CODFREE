@@ -1,19 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
-    const Article = sequelize.define("articles", {
+    const Comment = sequelize.define("comment", {
         id: {
             allowNull: false,
             primaryKey: true,
-            type: Sequelize.STRING
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.UUIDV4
         },
         title: {
             type: Sequelize.STRING
-        },
-        description: {
-            type: Sequelize.TEXT
         },
         text: {
             type: Sequelize.TEXT
         }
     });
-    return Article;
+    return Comment;
 };

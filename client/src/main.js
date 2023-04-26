@@ -7,4 +7,6 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-createApp(App).use(store).use(router).mount('#app')
+import { VueClipboard } from '@soerenmartius/vue3-clipboard'
+
+createApp(App).use(VueClipboard).use(store).use(router).mount('#app')

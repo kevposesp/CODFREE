@@ -1,0 +1,116 @@
+.article {
+    .workspace {
+        padding: 10px;
+
+        .edit {
+            .data {
+                padding-bottom: 10px;
+                .ttl {
+                    font-size: 40px;
+                }
+                .desc {
+                    font-size: 18px;
+                }
+            }
+
+            .cont {
+                border: 1px solid $whiteFive;
+                .act {
+                        font-size: 17px;
+                        display: flex;
+                    .ttl {
+                        background-color: $whiteFive;
+                        padding: 5px 10px;
+                        border-radius: 0px 0px 5px 0px;
+                    }
+                    .cp {
+                        margin-left: auto;
+                        padding: 5px 10px;
+                        background-color: $whiteFive;
+                        border-radius: 0px 0px 0px 5px;
+                        transition: 0.5s;
+                        &:hover {
+                            background-color: $greyOne;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                textarea {
+                    width: 100%;
+                    height: 500px;
+                    padding: 10px;
+                    border: none;
+                    font-size: 22px;
+                    &:focus,
+                    &:focus-visible {
+                        border: none;
+                        outline: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .usersspace {
+        padding: 10px;
+        .cont {
+            // padding: 10px;
+            .form-comment {
+                padding: 15px;
+                border: 1px solid $greyOne;
+                border-radius: 4px;
+            }
+            .comments {
+                margin-top: 20px;
+                .comment {
+                    display: flex;
+                    border: 1px solid $greyOne;
+                    border-radius: 4px;
+                    padding: 10px;
+                    .img {
+                        margin-right: 10px;
+                        img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .header {
+                        .personal {
+                            display: flex;
+                            align-items: center;
+                            .name {
+                                font-weight: bold;
+                                margin-right: 2px;
+                                font-size: 15px;
+                                &:hover {
+                                    cursor: pointer;
+                                    text-decoration: underline;
+                                }
+                            }
+                            .username {
+                                font-size: 12px;
+                                color: $greyTwo;
+                                &::before {
+                                    content: '@';
+                                }
+                                &:hover {
+                                    cursor: pointer;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                        .title {
+                            font-size: 20px;
+                            font-weight: 500;
+                        }
+                    }
+                    .body {
+                        padding: 3px;
+                    }
+                }
+            }
+        }
+    }
+}

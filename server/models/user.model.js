@@ -6,7 +6,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4
         },
-        nombre: {
+        img: {
+            type: Sequelize.STRING,
+            defaultValue: "https://picsum.photos/200/300"
+        },
+        name: {
             type: Sequelize.STRING
         },
         email: {

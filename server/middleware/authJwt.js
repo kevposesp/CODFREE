@@ -15,7 +15,7 @@ verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
 
     if (!token) {
-        return res.status(403).send({
+        return res.status(200).send({
             //   message: "No token provided!"
             message: "err_auth_no_token"
         });
@@ -29,12 +29,31 @@ verifyToken = (req, res, next) => {
             // });
             return catchError(err, res)
         }
+        req.statusUser = true
         req.userId = decoded.id;
         next();
     });
 };
 
+verifyAuth = (req, res, next) => {
+    let token = req.headers["x-access-token"];
+
+    if (!token) {
+        req.statusUser = false
+    } else {
+        req.statusUser = true
+        jwt.verify(token, config.secret, (err, decoded) => {
+            if (err) {
+                return catchError(err, res)
+            }
+            req.userId = decoded.id;
+        });
+    }
+    next()
+}
+
 const authJwt = {
-    verifyToken
+    verifyToken,
+    verifyAuth
 };
 module.exports = authJwt;
